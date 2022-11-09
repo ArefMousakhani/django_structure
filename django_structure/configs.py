@@ -3,8 +3,8 @@ from importlib import import_module
 
 LANGUAGE_CODE = 'en-us'
 REST_STRUCTURE_CONF = {
-    'response_handler': 'django_rest_structure.results.structure.response_structure',
-    'log_handler': 'django_rest_structure.logs.console.emmit',
+    'response_handler': 'django_structure.results.structure.response_structure',
+    'log_handler': 'django_structure.logs.console.emmit',
 }
 
 if hasattr(conf, 'settings'):

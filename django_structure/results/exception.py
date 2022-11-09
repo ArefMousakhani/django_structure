@@ -6,12 +6,13 @@ from rest_framework.exceptions import ParseError, AuthenticationFailed, NotAuthe
 from .codes import ResultMessages
 from .codes import ResultMessageStructure
 from .response import ResponseStructure, Request
+from django.utils.translation import gettext as _
 
 
 class Err(ResultMessages, Exception):
     def __init__(self, result_message: ResultMessageStructure, more_data=None, **message_context):
         self.more_data = more_data
-        self.message = Template(result_message.message).render(Context(message_context))
+        self.message = Template(_(result_message.message)).render(Context(message_context))
         self.code = result_message.code
         self.http_code = result_message.http_code
         super().__init__(self.message)

@@ -11,7 +11,7 @@ ___
 
 ```python
 MIDDLEWARE = (
-   'django_rest_structure.middlewares.middleware.RequestHandlerMiddleware',
+   'django_structure.middlewares.middleware.RequestHandlerMiddleware',
    ...
 )
 ```
@@ -21,25 +21,26 @@ ___
 ```python
 REST_FRAMEWORK = {
     ...
-    'EXCEPTION_HANDLER': 'django_rest_structure.results.exception.exception_handler'
+    'EXCEPTION_HANDLER': 'django_structure.results.exception.exception_handler'
     ...
 }
 ```
 ###### then add to `YOUR-PROJECT/urls.py`
 ```python
-handler404 = 'django_rest_structure.api.views.error_view_404'
-handler500 = 'django_rest_structure.api.views.error_view_500'
-handler403 = 'django_rest_structure.api.views.error_view_403'
-handler400 = 'django_rest_structure.api.views.error_view_400'
+handler404 = 'django_structure.api.views.error_view_404'
+handler500 = 'django_structure.api.views.error_view_500'
+handler403 = 'django_structure.api.views.error_view_403'
+handler400 = 'django_structure.api.views.error_view_400'
 
 ```
 ___
 
 
 ## 4. Create your result messages like:
+
 ```python
-from django_rest_structure.results.codes import ResultMessageStructure
-from django_rest_structure.results.exception import ResultMessages
+from django_structure.results.codes import ResultMessageStructure
+from django_structure.results.exception import ResultMessages
 
 class MyCustomResultMessages(ResultMessages):
     CUSTOM_ERROR = ResultMessageStructure(1, 'My Custom Error', False, 500)
@@ -51,8 +52,9 @@ class MyCustomResultMessages(ResultMessages):
 ___
 
 ## 5. Create your custom exception like:
+
 ```python
-from django_rest_structure.results.exception import Err
+from django_structure.results.exception import Err
 
 class MyCustomError(MyCustomResultMessages, Err):
     def __init__(self, *args, **kwargs):
@@ -63,7 +65,7 @@ ___
 ## 6. Now you should create your views like:
 
 ```python
-from django_rest_structure.api.views import BaseApiView
+from django_structure.api.views import BaseApiView
 
 class MyView(BaseApiView):
     def post_method(self, request, *args, **kwargs):
@@ -90,11 +92,11 @@ class MyView(BaseApiView):
 
 ## 7. Create your serializers like:
 
-### 1. simple serializers 
+### 1. simple serializers
 
 ```python
-from django_rest_structure.api.views import BaseApiView
-from django_rest_structure.api.serializers import BaseSerializer
+from django_structure.api.views import BaseApiView
+from django_structure.api.serializers import BaseSerializer
 from rest_framework import serializers
 
 class MySerializer(BaseSerializer):
@@ -136,10 +138,11 @@ class MyView(BaseApiView):
 }
 ```
 ### 2. serializer with custom validation
+
 ```python
-from django_rest_structure.api.views import BaseApiView
-from django_rest_structure.api.serializers import BaseSerializer
-from django_rest_structure.api.validations import StrFieldValidation
+from django_structure.api.views import BaseApiView
+from django_structure.api.serializers import BaseSerializer
+from django_structure.api.validations import StrFieldValidation
 from rest_framework import serializers
 
 def my_field_vld(value, **extra_params):
@@ -210,9 +213,10 @@ class MyView(BaseApiView):
 }
 ```
 ### 3. list serializer
+
 ```python
-from django_rest_structure.api.views import BaseApiView
-from django_rest_structure.api.serializers import MyListSerializer
+from django_structure.api.views import BaseApiView
+from django_structure.api.serializers import MyListSerializer
 
 class MySerializer(MyListSerializer):
 
@@ -267,7 +271,7 @@ class MyView(BaseApiView):
 ```python
 
 REST_STRUCTURE_CONF = {
-    'response_handler': 'django_rest_structure.results.structure.response_structure'
+    'response_handler': 'django_structure.results.structure.response_structure'
 }
 
 ```
@@ -291,7 +295,7 @@ def response_structure(response):
 ```python
 
 REST_STRUCTURE_CONF = {
-        'log_handler': 'django_rest_structure.logs.console.emmit',
+        'log_handler': 'django_structure.logs.console.emmit',
 }
 
 ```
